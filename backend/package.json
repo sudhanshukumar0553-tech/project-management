@@ -2,11 +2,11 @@
   "name": "trello-clone-backend",
   "version": "1.0.0",
   "private": true,
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js",
+    "start": "node dist/src/index.js",
     "db:migrate": "prisma migrate dev",
     "db:seed": "tsx prisma/seed.ts",
     "db:studio": "prisma studio"
