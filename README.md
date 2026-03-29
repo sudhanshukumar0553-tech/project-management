@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Trello Clone - SDE Intern Fullstack Assignment
 
-## Getting Started
+## Tech Stack
+- Frontend: Next.js 16, TypeScript, Tailwind CSS v4, @dnd-kit, Axios, lucide-react
+- Backend: Node.js, Express.js, TypeScript
+- Database: PostgreSQL with Prisma ORM
+- Deployment: Vercel (frontend), Render (backend)
 
-First, run the development server:
+## Prerequisites
+- Node.js 18+
+- PostgreSQL 14+
+- npm or yarn
 
+## Local Setup
+
+### 1. Clone and Install
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <repo-url>
+
+# Frontend
+npm install
+
+# Backend
+cd backend
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Database Setup
+```bash
+# Create a PostgreSQL database named trello_clone
+# Update backend/.env with your DATABASE_URL
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+cd backend
+npm run db:migrate
+npm run db:seed
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. Environment Variables
 
-## Learn More
+Frontend (.env.local):
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5000/api
+```
 
-To learn more about Next.js, take a look at the following resources:
+Backend (backend/.env):
+```env
+DATABASE_URL="postgresql://postgres:password@localhost:5432/trello_clone"
+PORT=5000
+FRONTEND_URL=http://localhost:3000
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 4. Run Development Servers
+```bash
+# Terminal 1 - Backend
+cd backend
+npm run dev
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Terminal 2 - Frontend
+npm run dev
+```
 
-## Deploy on Vercel
+Open http://localhost:3000
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Assumptions
+- No authentication required - default user is assumed logged in
+- BoardId=1 is the main working board (seeded automatically)
+- Sample members (Alice, Bob, Carol, Dave) are pre-seeded for assignment feature
+- Position uses fractional indexing for efficient reordering
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deployment
+- Frontend: Deploy to Vercel, set NEXT_PUBLIC_API_URL to backend URL
+- Backend: Deploy to Render as a Node.js service, set DATABASE_URL from Render PostgreSQL
